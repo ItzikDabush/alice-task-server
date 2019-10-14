@@ -29,10 +29,9 @@ function getRelevantData(response) {
 
   // according to OpenWeatherMap they don't provide probability of precipitation at the moment just the precipitation im mm unit for the past 1h or 3hr.
   
-  //Since OpenWeatherMap respone with rain perciptation only if there is a rain precipitation, I used a logical opertor to prevent undefined value in case of no rain.
-  console.log(response.data.rain)
-  const precipitation = response.data.rain ? response.data.rain : { "1h": "0" };
-
+  
+  //Since OpenWeatherMap respone with rain perciptation only if there is actually rain precipitation and on deployemnt via heroku sometimes the OpenWeatherMap returns empty object so I used a logical opertor to prevent undefined value in case of no rain. 
+  const precipitation = response.data.rain || response.data.rain ?  response.data.rain : { "1h": "0" };
   return {
     wind: kmPerHour,
     humadity: response.data.main.humidity,
