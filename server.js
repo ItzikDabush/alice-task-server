@@ -14,11 +14,11 @@ app.use(cors());
 function getCityID(city) {
   let cityId = null;
   if (city.toLowerCase() === "amsterdam") {
-    return cityId = 2759794;
+    return (cityId = 2759794);
   } else if (city.toLowerCase() === "berlin") {
-    return cityId = 2950158;
+    return (cityId = 2950158);
   } else if (city.toLowerCase() === "london") {
-    return cityId = 2643743;
+    return (cityId = 2643743);
   }
   return cityId;
 }
@@ -28,7 +28,8 @@ function getRelevantData(response) {
   const roundedTemp = Math.round(response.data.main.temp);
   // according to OpenWeatherMap they don't provide probability of precipitation at the moment just the precipitation im mm unit for the past 1h or 3hr.
   //Since the api respone with rain perciptation only if there is a rain precipitation, I used a logical opertor to prevent undefined value in case of no rain.
-  const precipitation = response.data.rain || { "1h": 0 };
+  console.log(response.data.rain)
+  const precipitation = response.data.rain || { "1h": "0" };
 
   return {
     wind: kmPerHour,
