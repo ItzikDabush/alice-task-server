@@ -26,10 +26,11 @@ function getCityID(city) {
 function getRelevantData(response) {
   const kmPerHour = Math.round(response.data.wind.speed * 3.6);
   const roundedTemp = Math.round(response.data.main.temp);
+
   // according to OpenWeatherMap they don't provide probability of precipitation at the moment just the precipitation im mm unit for the past 1h or 3hr.
-  //Since the api respone with rain perciptation only if there is a rain precipitation, I used a logical opertor to prevent undefined value in case of no rain.
-  console.log(response.data.rain);
-  const precipitation = response.data.rain || { "1h": "0" };
+  
+  //Since OpenWeatherMap respone with rain perciptation only if there is a rain precipitation, I used a logical opertor to prevent undefined value in case of no rain.
+  const precipitation = response.data.rain ? response.data.rain : { "1h": "0" };
 
   return {
     wind: kmPerHour,
