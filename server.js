@@ -33,7 +33,7 @@ function getRelevantData(response) {
   function getRain(rain) {
     console.log("from api", rain);
     let newRain = {};
-    if (rain["1h"] === undefined || !rain.hasOwnProperty("1h")) {
+    if (rain === undefined || !rain.hasOwnProperty("1h")) {
       newRain["1h"] = 0;
       return newRain;
     }
