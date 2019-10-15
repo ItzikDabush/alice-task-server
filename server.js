@@ -27,7 +27,7 @@ function getRelevantData(response) {
   const kmPerHour = Math.round(response.data.wind.speed * 3.6);
   const roundedTemp = Math.round(response.data.main.temp);
 
-  // according to OpenWeatherMap they don't provide probability of precipitation at the moment just the precipitation im mm units for the past 1h or 3h.
+  // according to OpenWeatherMap they don't provide probability of precipitation at the moment just the precipitation im mm units for the past 1h or 3h. inorde to be consisted through the pages, i decided to go with 1h precipitation.
 
   //Since OpenWeatherMap respone with rain perciptation only if there is actually rain precipitation and sometimes the OpenWeatherMap returns empty object if there is no rain precipitation, I used this function to prevent undefined or emtpy objects values in case of no rain.
   function getRain(rain) {
