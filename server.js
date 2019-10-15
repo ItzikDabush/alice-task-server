@@ -27,11 +27,21 @@ function getRelevantData(response) {
   const kmPerHour = Math.round(response.data.wind.speed * 3.6);
   const roundedTemp = Math.round(response.data.main.temp);
 
-  // according to OpenWeatherMap they don't provide probability of precipitation at the moment just the precipitation im mm unit for the past 1h or 3hr.
-  
-  
-  //Since OpenWeatherMap respone with rain perciptation only if there is actually rain precipitation and on deployemnt via heroku sometimes the OpenWeatherMap returns empty object so I used a logical opertor to prevent undefined value in case of no rain. 
-  const precipitation = response.data.rain || response.data.rain ?  response.data.rain : { "1h": "0" };
+  // according to OpenWeatherMap they don't provide probability of precipitation at the moment just the precipitation im mm units for the past 1h or 3h.
+
+  //Since OpenWeatherMap respone with rain perciptation only if there is actually rain precipitation and sometimes the OpenWeatherMap returns empty object if there is no rain precipitation, I used this function to prevent undefined or emtpy objects values in case of no rain.
+  function getRain(rain) {
+    console.log("from api", rain);
+    let newRain = {};
+    if (rain === undefined || Object.keys(rain).length === 0) {
+      newRain["1h"] = 0;
+      return newRain;
+    }
+    return rain;
+  }
+
+  let precipitation = getRain(response.data.rain);
+
   return {
     wind: kmPerHour,
     humadity: response.data.main.humidity,
