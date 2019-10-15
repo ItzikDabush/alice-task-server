@@ -33,11 +33,11 @@ function getRelevantData(response) {
   function getRain(rain) {
     console.log("from api", rain);
     let newRain = {};
-    if (rain === undefined || Object.keys(rain).length === 0) {
+    if (rain["1h"] === undefined || Object.keys(rain).length === 0) {
       newRain["1h"] = 0;
       return newRain;
     }
-    return rain;
+    return rain["1h"];
   }
 
   let precipitation = getRain(response.data.rain);
