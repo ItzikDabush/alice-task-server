@@ -65,8 +65,7 @@ app.get("/:city", (req, res) => {
       return res.status(200).json(cityRelevantData);
     })
     .catch(error => {
-      console.log("inside axios catch", error);
-      return res.status(404).json(error.message);
+           return res.status(404).json(error.message);
     });
 });
 
